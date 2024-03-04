@@ -180,6 +180,10 @@ namespace StreetEye.data
                 
                 modelBuilder.Entity<StatusSemaforo>()
                     .HasKey(ss => new {ss.IdSemaforo, ss.Momento});
+
+                modelBuilder.Entity<StatusSemaforo>()
+                    .HasMany(s => s.Id)
+                    .WithOne(s => s.IdSemaforo);
             }
         
             // responsaveis
