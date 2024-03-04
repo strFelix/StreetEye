@@ -8,6 +8,7 @@ namespace StreetEye.models
 {
     public class StatusSemaforo
     {
+        // foreign de semaforo
         public int IdSemaforo { get; set; }
         public DateTime Momento { get; set; }
         public bool StatusVisor { get; set; }

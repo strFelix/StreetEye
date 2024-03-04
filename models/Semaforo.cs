@@ -16,5 +16,8 @@ namespace StreetEye.models
         public string ViaCruzamento { get; set; } = string.Empty;
         public string Latitude { get; set; } = string.Empty;
         public string Longitude { get; set; } = string.Empty;
-    }
+
+        // navigation
+        public ICollection<StatusSemaforo> Status { get; set; }
+    } 
 }

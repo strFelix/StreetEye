@@ -117,6 +117,12 @@ namespace StreetEye.data
                 modelBuilder.Entity<Usuario>()
                     .Property(u => u.PasswordSalt)
                     .HasMaxLength(255);
+
+                // foreign de historicos para usuarios
+                modelBuilder.Entity<Usuario>()
+                    .HasMany(u => u.Historicos)
+                    .WithOne(u => u.Usuario)
+                    .HasForeignKey(u => u.IdUsuario);
             }
         
             // historico_usuarios
@@ -171,6 +177,12 @@ namespace StreetEye.data
                 modelBuilder.Entity<Semaforo>()
                     .Property(s => s.Longitude)
                     .HasMaxLength(20);
+
+                // foreign de status para semaforo
+                modelBuilder.Entity<Semaforo>()
+                    .HasMany(s => s.Status)
+                    .WithOne(s => s.Semaforo)
+                    .HasForeignKey(s => s.IdSemaforo);
             }
        
             // status_semaforos
@@ -181,9 +193,6 @@ namespace StreetEye.data
                 modelBuilder.Entity<StatusSemaforo>()
                     .HasKey(ss => new {ss.IdSemaforo, ss.Momento});
 
-                modelBuilder.Entity<StatusSemaforo>()
-                    .HasMany(s => s.Id)
-                    .WithOne(s => s.IdSemaforo);
             }
         
             // responsaveis
