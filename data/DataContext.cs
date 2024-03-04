@@ -23,10 +23,9 @@ namespace StreetEye.data
         public DbSet<Responsavel> Responsaveis { get; set; }
         public DbSet<UsuarioImagem> UsuariosImagem { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // ** VERIFICAR FOREING KEYS **
+            // ** VERIFICAR FOREIGN KEYS **
 
             // utilizadores
             {
@@ -181,6 +180,28 @@ namespace StreetEye.data
                 
                 modelBuilder.Entity<StatusSemaforo>()
                     .HasKey(ss => new {ss.IdSemaforo, ss.Momento});
+            }
+        
+            // responsaveis
+            {
+                modelBuilder.Entity<Responsavel>()
+                    .ToTable("responsaveis");
+
+                modelBuilder.Entity<Responsavel>()
+                    .HasKey(r => new {r.IdUtilizador, r.IdResponsavel});
+            }
+
+            // usuarioImagem
+            {
+                modelBuilder.Entity<UsuarioImagem>()
+                    .ToTable("usuario_imagem");
+
+                modelBuilder.Entity<UsuarioImagem>()
+                    .HasKey(ui => ui.IdUsuario);
+                
+                modelBuilder.Entity<UsuarioImagem>()
+                    .Property(ui => ui.Imagem)
+                    .HasColumnType("varbinary(max)");
             }
         }
     }
