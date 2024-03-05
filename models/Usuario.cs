@@ -19,6 +19,8 @@ namespace StreetEye.models
 
         [NotMapped]
         public Utilizador? Utilizador {get; set;}
+        [NotMapped]
+        public UsuarioImagem? UsuarioImagem { get; set; }
 
         // navigation
         public ICollection<HistoricoUsuario> Historicos { get; set; }

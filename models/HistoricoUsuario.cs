@@ -17,6 +17,7 @@ namespace StreetEye.models
 
         [NotMapped]
         public Usuario? Usuario { get; set; }
-    
+        [NotMapped]
+        public Semaforo? Semaforo { get; set; }
     }
 }

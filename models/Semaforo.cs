@@ -19,5 +19,6 @@ namespace StreetEye.models
 
         // navigation
         public ICollection<StatusSemaforo> Status { get; set; }
+        public ICollection<HistoricoUsuario> Historicos { get; set; }
     } 
 }
