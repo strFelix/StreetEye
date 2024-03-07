@@ -406,9 +406,9 @@ C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\staticwebassets\msb
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.StreetEye.props
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\scopedcss\bundle\StreetEye.styles.css
-C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\StreetEye.csproj.CopyComplete
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\StreetEye.dll
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\refint\StreetEye.dll
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\StreetEye.pdb
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\StreetEye.genruntimeconfig.cache
 C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\ref\StreetEye.dll
+C:\Users\Lucas\Documents\Projects\StreetEye\obj\Debug\net8.0\StreetEye.csproj.Up2Date

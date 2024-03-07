@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using StreetEye.models.enums;
+using StreetEye.models;
 
 namespace StreetEye.models
 {
@@ -23,5 +24,11 @@ namespace StreetEye.models
         public string CEP { get; set; } = string.Empty;
         public string Latitude { get; set; } = string.Empty;
         public string Longitude { get; set; } = string.Empty;
+
+
+        //navigation
+        public ICollection<Usuario>? Usuarios { get; set; }
+        public List<Responsavel>? Responsaveis { get; set; }
+        
     }
 }

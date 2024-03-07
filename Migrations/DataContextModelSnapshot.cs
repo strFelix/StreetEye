@@ -164,6 +164,8 @@ namespace StreetEye.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdUtilizador");
+
                     b.ToTable("usuarios", (string)null);
                 });
 
@@ -185,6 +187,8 @@ namespace StreetEye.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Bairro")
                         .IsRequired()
@@ -272,6 +276,17 @@ namespace StreetEye.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("StreetEye.models.Responsavel", b =>
+                {
+                    b.HasOne("StreetEye.models.Utilizador", "ResponsavelUtilizador")
+                        .WithMany("Responsaveis")
+                        .HasForeignKey("IdUtilizador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ResponsavelUtilizador");
+                });
+
             modelBuilder.Entity("StreetEye.models.StatusSemaforo", b =>
                 {
                     b.HasOne("StreetEye.models.Semaforo", "Semaforo")
@@ -283,22 +298,22 @@ namespace StreetEye.Migrations
                     b.Navigation("Semaforo");
                 });
 
+            modelBuilder.Entity("StreetEye.models.Usuario", b =>
+                {
+                    b.HasOne("StreetEye.models.Utilizador", "Utilizador")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("IdUtilizador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Utilizador");
+                });
+
             modelBuilder.Entity("StreetEye.models.UsuarioImagem", b =>
                 {
                     b.HasOne("StreetEye.models.Usuario", "Usuario")
                         .WithOne("UsuarioImagem")
                         .HasForeignKey("StreetEye.models.UsuarioImagem", "IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("StreetEye.models.Utilizador", b =>
-                {
-                    b.HasOne("StreetEye.models.Usuario", "Usuario")
-                        .WithMany("Utilizadores")
-                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -317,8 +332,13 @@ namespace StreetEye.Migrations
                     b.Navigation("Historicos");
 
                     b.Navigation("UsuarioImagem");
+                });
 
-                    b.Navigation("Utilizadores");
+            modelBuilder.Entity("StreetEye.models.Utilizador", b =>
+                {
+                    b.Navigation("Responsaveis");
+
+                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

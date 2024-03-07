@@ -89,6 +89,11 @@ namespace StreetEye.data
                 modelBuilder.Entity<Utilizador>()
                     .Property(u => u.Longitude)
                     .HasMaxLength(20);
+
+                modelBuilder.Entity<Utilizador>()
+                    .HasMany(u => u.Usuarios)
+                    .WithOne(u => u.Utilizador)
+                    .HasForeignKey(u => u.IdUtilizador);
             }
 
             // usuarios
@@ -122,7 +127,7 @@ namespace StreetEye.data
                 modelBuilder.Entity<Usuario>()
                     .HasMany(u => u.Historicos)
                     .WithOne(u => u.Usuario)
-                    .HasForeignKey(u => u.IdUsuario); 
+                    .HasForeignKey(u => u.IdUsuario);
             }
         
             // historico_usuarios
@@ -208,6 +213,12 @@ namespace StreetEye.data
 
                 modelBuilder.Entity<Responsavel>()
                     .HasKey(r => new {r.IdUtilizador, r.IdResponsavel});
+
+                //foreign de utilizadores para responsaveis
+                modelBuilder.Entity<Responsavel>()
+                    .HasOne(r => r.ResponsavelUtilizador)
+                    .WithMany(u => u.Responsaveis)
+                    .HasForeignKey(r => r.IdUtilizador);        
             }
 
             // usuarioImagem
