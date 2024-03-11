@@ -89,6 +89,11 @@ namespace StreetEye.data
                 modelBuilder.Entity<Utilizador>()
                     .Property(u => u.Longitude)
                     .HasMaxLength(20);
+
+                modelBuilder.Entity<Utilizador>()
+                    .HasMany(u => u.Usuarios)
+                    .WithOne(u => u.Utilizador)
+                    .HasForeignKey(u => u.IdUtilizador);
             }
 
             // usuarios
@@ -140,6 +145,12 @@ namespace StreetEye.data
                 modelBuilder.Entity<HistoricoUsuario>()
                     .Property(hu => hu.Longitude)
                     .HasMaxLength(20);
+
+                // foreign de historicoUsuario para semaforo
+                modelBuilder.Entity<HistoricoUsuario>()
+                  .HasOne(hu => hu.Semaforo)
+                  .WithMany(s => s.Historicos)
+                  .HasForeignKey(hu => hu.IdSemaforo);
             }
 
             // semaforos 
@@ -202,6 +213,12 @@ namespace StreetEye.data
 
                 modelBuilder.Entity<Responsavel>()
                     .HasKey(r => new {r.IdUtilizador, r.IdResponsavel});
+
+                //foreign de utilizadores para responsaveis
+                modelBuilder.Entity<Responsavel>()
+                    .HasOne(r => r.ResponsavelUtilizador)
+                    .WithMany(u => u.Responsaveis)
+                    .HasForeignKey(r => r.IdUtilizador);        
             }
 
             // usuarioImagem
@@ -215,6 +232,12 @@ namespace StreetEye.data
                 modelBuilder.Entity<UsuarioImagem>()
                     .Property(ui => ui.Imagem)
                     .HasColumnType("varbinary(max)");
+
+                // foreign de usuarioImagem para usuarios
+                modelBuilder.Entity<UsuarioImagem>()
+                  .HasOne(ui => ui.Usuario)
+                  .WithOne(u => u.UsuarioImagem)
+                  .HasForeignKey<UsuarioImagem>(ui => ui.IdUsuario);
             }
         }
     }

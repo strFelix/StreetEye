@@ -18,7 +18,9 @@ namespace StreetEye.models
         public byte[]? PasswordSalt {get; set;}
 
         [NotMapped]
-        public Utilizador? Utilizador {get; set;}
+        public UsuarioImagem? UsuarioImagem { get; set; }
+        [NotMapped]
+        public Utilizador? Utilizador { get; set; }
 
         // navigation
         public ICollection<HistoricoUsuario> Historicos { get; set; }
