@@ -33,7 +33,7 @@ namespace StreetEye.controllers
             }
         }
 
-        [HttpGet("GetSingle/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetSemaforo(int id){
             try
             {
