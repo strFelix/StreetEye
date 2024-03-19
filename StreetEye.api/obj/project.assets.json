@@ -59,6 +59,19 @@
           }
         }
       },
+      "libphonenumber-csharp/8.13.32": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "type": "package",
         "compile": {
@@ -1610,6 +1623,25 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "libphonenumber-csharp/8.13.32": {
+      "sha512": "jdacJ7sYGeT+9eQcRMUzwqCpWEDvt7kwSe41ZfjAPuaoz0HUIZy1yknwlITqv+AcLl+hDR+vQteHYNPxbWeNig==",
+      "type": "package",
+      "path": "libphonenumber-csharp/8.13.32",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/PhoneNumbers.dll",
+        "lib/net6.0/PhoneNumbers.xml",
+        "lib/net7.0/PhoneNumbers.dll",
+        "lib/net7.0/PhoneNumbers.xml",
+        "lib/netstandard2.0/PhoneNumbers.dll",
+        "lib/netstandard2.0/PhoneNumbers.xml",
+        "libphonenumber-csharp.8.13.32.nupkg.sha512",
+        "libphonenumber-csharp.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
@@ -4401,7 +4433,8 @@
       "Microsoft.EntityFrameworkCore >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.1",
-      "Swashbuckle.AspNetCore >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0",
+      "libphonenumber-csharp >= 8.13.32"
     ]
   },
   "packageFolders": {
@@ -4471,6 +4504,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.5.0, )"
+          },
+          "libphonenumber-csharp": {
+            "target": "Package",
+            "version": "[8.13.32, )"
           }
         },
         "imports": [

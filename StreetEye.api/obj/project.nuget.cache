@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "/xFrR1zsjcM3LVsTnZ0PteBovihvIXnf0YR6DZ0dqN3MSAYO647mqLIE/g2TI6GfjjRWrQBkMTYeTmqwArZhRg==",
+  "dgSpecHash": "0IWMIR+1GLUj5SUrNTGoSisedIZ7OhpVxLmMMSs/Q/qmWqVyeR3AU4jusQN8yTjMZz0rhY9qaXTbKEu99CpPCg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lucas\\Documents\\Projects\\StreetEye\\StreetEye.api\\StreetEye.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lucas\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Lucas\\.nuget\\packages\\libphonenumber-csharp\\8.13.32\\libphonenumber-csharp.8.13.32.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\microsoft.codeanalysis.common\\4.5.0\\microsoft.codeanalysis.common.4.5.0.nupkg.sha512",

@@ -135,3 +135,4 @@ C:\Users\Lucas\Documents\Projects\StreetEye\StreetEye.api\obj\Debug\net8.0\refin
 C:\Users\Lucas\Documents\Projects\StreetEye\StreetEye.api\obj\Debug\net8.0\StreetEye.pdb
 C:\Users\Lucas\Documents\Projects\StreetEye\StreetEye.api\obj\Debug\net8.0\StreetEye.genruntimeconfig.cache
 C:\Users\Lucas\Documents\Projects\StreetEye\StreetEye.api\obj\Debug\net8.0\ref\StreetEye.dll
+C:\Users\Lucas\Documents\Projects\StreetEye\StreetEye.api\bin\Debug\net8.0\PhoneNumbers.dll
