@@ -116,6 +116,9 @@ namespace StreetEye.data
                     .HasMaxLength(50);
 
                 modelBuilder.Entity<Usuario>()
+                    .Ignore(u => u.Password);
+
+                modelBuilder.Entity<Usuario>()
                     .Property(u => u.PasswordHash)
                     .HasMaxLength(255);
                 
