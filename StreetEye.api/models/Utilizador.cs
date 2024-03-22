@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StreetEye.models.enums;
 using StreetEye.models;
+using Newtonsoft.Json;
 
 namespace StreetEye.models
 {
@@ -27,7 +28,9 @@ namespace StreetEye.models
 
 
         //navigation
+        [JsonIgnore]
         public ICollection<Usuario>? Usuarios { get; set; }
+        [JsonIgnore]
         public List<Responsavel>? Responsaveis { get; set; }
         
     }

@@ -76,6 +76,7 @@ public class UsuariosController : ControllerBase
                 usuario.Password = string.Empty;
                 usuario.PasswordHash = hash;
                 usuario.PasswordSalt = salt;
+                await _context.Utilizadores.AddAsync(usuario.Utilizador);
                 await _context.Usuarios.AddAsync(usuario);
                 await _context.SaveChangesAsync();
 
@@ -105,6 +106,8 @@ public class UsuariosController : ControllerBase
                     return BadRequest("Senha incorreta.");
                 else
                 {
+                    usuario.Utilizador = await _context.Utilizadores.FirstOrDefaultAsync(ut => ut.Id == usuario.IdUtilizador);
+
                     usuario.PasswordHash = null;
                     usuario.PasswordSalt = null;
                     return Ok(usuario);

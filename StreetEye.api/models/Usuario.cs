@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace StreetEye.models
 {
@@ -18,10 +19,13 @@ namespace StreetEye.models
         public byte[]? PasswordSalt {get; set;}
 
         [NotMapped]
+        [JsonIgnore]
         public UsuarioImagem? UsuarioImagem { get; set; }
+
         [NotMapped]
         public Utilizador? Utilizador { get; set; }
 
+        [JsonIgnore]
         // navigation
         public ICollection<HistoricoUsuario>? Historicos { get; set; }
     }

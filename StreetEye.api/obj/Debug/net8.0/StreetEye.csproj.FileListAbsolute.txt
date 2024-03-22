@@ -412,3 +412,7 @@ C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\obj\Debug\net8.0\refi
 C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\obj\Debug\net8.0\StreetEye.pdb
 C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\obj\Debug\net8.0\StreetEye.genruntimeconfig.cache
 C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\obj\Debug\net8.0\ref\StreetEye.dll
+C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
