@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StreetEye.data;
 using StreetEye.models;
 
@@ -19,78 +20,121 @@ namespace StreetEye.controllers
             _context = context;
         }
 
-        // GET
+        #region Get
+            
         [HttpGet]
-        public async Task<IActionResult> GetSemaforos(){
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllAsync(){
             try
             {
                 List<Semaforo> list = await _context.Semaforos.ToListAsync();
+
+                if(list.IsNullOrEmpty())
+                    return NoContent();
+
                 return Ok(list);
             }
             catch (System.Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSemaforo(int id){
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetBySemaforoIdAsync(int id){
             try
             {
                 Semaforo semaforo = await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
+                
+                if(semaforo == null)
+                    return NotFound("Semaforo " + id + " não enocontrado");
+
                 return Ok(semaforo);
             }
             catch (System.Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        #endregion
         
-        // POST
+        #region Post
+            
         [HttpPost]
-        public async Task<IActionResult> PostSemaforo(Semaforo semaforo){
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Semaforo))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PostSemaforoAsync(Semaforo semaforo){
             try
             {
                 await _context.Semaforos.AddAsync(semaforo);
                 await _context.SaveChangesAsync();
 
-                return Ok(semaforo);
+                return Created(nameof(SemaforosController), semaforo);
             }
             catch (System.Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
-        // PUT
-        [HttpPut]
-        public async Task<IActionResult> PutSemaforo(Semaforo semaforo){
-            try
-            {
-                _context.Semaforos.Update(semaforo);
-                int rows = await _context.SaveChangesAsync();
-                return Ok(rows);
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        #endregion
 
-        // DELETE
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSemaforo(int id){
+        #region Put
+            
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PutSemaforoAsync(int id){
             try
             {
                 Semaforo semaforo = await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
+
+                if(semaforo == null)
+                    return NotFound("Semaforo" + id + "não encontrado");
+
+                _context.Semaforos.Update(semaforo);
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        
+        #endregion
+
+        #region Delete
+            
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteSemaforoAsync(int id){
+            try
+            {
+                Semaforo semaforo = await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
+                
+                if(semaforo == null)
+                    return NotFound("Semaforo" + id + "não encontrado");
+
                 _context.Semaforos.Remove(semaforo);
                 int rows = await _context.SaveChangesAsync();
                 return Ok(rows);
             }
             catch (System.Exception ex)
             {   
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        #endregion
     }
 }
