@@ -9,6 +9,7 @@ using StreetEye.models;
 using PhoneNumbers;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace StreetEye.api.controllers;
 
@@ -60,27 +61,42 @@ public class UtilizadoresController : ControllerBase
     
     #region Get
     [HttpGet]
-    public async Task<IActionResult> GetUtilizadores(){
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetAllAsync(){
         try
         {
             List<Utilizador> list = await _context.Utilizadores.ToListAsync();
+
+            if(list.IsNullOrEmpty())
+                return NoContent();            
+
             return Ok(list);
         }
         catch (System.Exception ex)
         {
-            return BadRequest(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
+
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetUtilizador(int id){
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetByUtilizadorIdAsync(int id){
         try
         {
-            Utilizador search = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
-            return Ok(search);
+            Utilizador utilizador = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
+
+            if(utilizador == null)
+                return NotFound();
+
+            return Ok(utilizador);
         }
         catch (System.Exception ex)
         {
-            return BadRequest(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
         
@@ -88,7 +104,10 @@ public class UtilizadoresController : ControllerBase
 
     #region Post
     [HttpPost]
-    public async Task<IActionResult> InserirUtilizador(Utilizador utilizador){
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Utilizador))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> PostUtilizadorAsync(Utilizador utilizador){
         try
         {   
             // verificação data de nascimento (yyyy/MM/dd)
@@ -105,22 +124,31 @@ public class UtilizadoresController : ControllerBase
             await _context.Utilizadores.AddAsync(utilizador);
             await _context.SaveChangesAsync();
 
-            return Ok(utilizador);
+            return Created(nameof(UtilizadoresController), utilizador);
         }
         catch (System.Exception ex)
         {
-            return BadRequest(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     } 
     #endregion
     
     #region Put
-    [HttpPut]
-    public async Task<IActionResult> AtualizarUtilizador(Utilizador utilizador){
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> PutUtilizadorAsync(int id){
     try
         {       
             // alterar nome, telefone e endereco apenas
             // registrar latitude e longitude de acordo com endereço passado
+
+            Utilizador utilizador = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
+            
+            if(utilizador == null)
+                return NotFound();
 
             if(ValidarNumeroTelefone(utilizador.Telefone))
                 throw new Exception("Numero de telefone invalido.");
@@ -128,11 +156,11 @@ public class UtilizadoresController : ControllerBase
             _context.Utilizadores.Update(utilizador);
             await _context.SaveChangesAsync();
 
-            return Ok(utilizador);
+            return NoContent();
         }
         catch (System.Exception ex)
         {
-            return BadRequest(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
     #endregion
