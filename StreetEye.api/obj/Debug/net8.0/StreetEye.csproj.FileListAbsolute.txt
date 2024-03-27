@@ -416,3 +416,4 @@ C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Micr
 C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\Brenda\Documents\projects\StreetEye\StreetEye.api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

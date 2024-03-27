@@ -19,6 +19,9 @@ namespace StreetEye.models
         public byte[]? PasswordSalt {get; set;}
 
         [NotMapped]
+        public string Token { get; set; }  = string.Empty;       
+        
+        [NotMapped]
         [JsonIgnore]
         public UsuarioImagem? UsuarioImagem { get; set; }
 
