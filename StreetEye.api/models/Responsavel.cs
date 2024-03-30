@@ -12,6 +12,9 @@ namespace StreetEye.models
         public int IdResponsavel { get; set; }
         
         [NotMapped]
+        public Utilizador? Utilizador { get; set; }
+
+        [NotMapped]
         public Utilizador? ResponsavelUtilizador { get; set; }
     }
 }

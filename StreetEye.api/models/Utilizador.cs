@@ -31,7 +31,7 @@ namespace StreetEye.models
         [JsonIgnore]
         public ICollection<Usuario>? Usuarios { get; set; }
         [JsonIgnore]
-        public List<Responsavel>? Responsaveis { get; set; }
+        public ICollection<Responsavel>? Responsaveis { get; set; }
         
     }
 }
