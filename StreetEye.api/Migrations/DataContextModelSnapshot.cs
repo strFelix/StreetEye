@@ -60,6 +60,8 @@ namespace StreetEye.Migrations
 
                     b.HasKey("IdUtilizador", "IdResponsavel");
 
+                    b.HasIndex("IdResponsavel");
+
                     b.ToTable("responsaveis", (string)null);
                 });
 
@@ -150,10 +152,6 @@ namespace StreetEye.Migrations
                     b.Property<int>("IdUtilizador")
                         .HasColumnType("int");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte[]>("PasswordHash")
                         .HasMaxLength(255)
                         .HasColumnType("varbinary(255)");
@@ -205,12 +203,11 @@ namespace StreetEye.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Complemento")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateOnly>("DataNascimento")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -218,12 +215,10 @@ namespace StreetEye.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Latitude")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Longitude")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -279,12 +274,19 @@ namespace StreetEye.Migrations
             modelBuilder.Entity("StreetEye.models.Responsavel", b =>
                 {
                     b.HasOne("StreetEye.models.Utilizador", "ResponsavelUtilizador")
+                        .WithMany()
+                        .HasForeignKey("IdResponsavel")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("StreetEye.models.Utilizador", "Utilizador")
                         .WithMany("Responsaveis")
                         .HasForeignKey("IdUtilizador")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ResponsavelUtilizador");
+
+                    b.Navigation("Utilizador");
                 });
 
             modelBuilder.Entity("StreetEye.models.StatusSemaforo", b =>
