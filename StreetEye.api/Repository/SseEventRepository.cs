@@ -7,7 +7,7 @@ namespace StreetEye.Repository
 
         public SseEventRepository(HttpClient httpClient)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
         public async Task<System.IO.Stream> GetSseEventStreamAsync(string sseEndppointUrl, CancellationToken cancellationToken)

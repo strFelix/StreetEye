@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StreetEye.Config;
 using StreetEye.data;
 using StreetEye.Repository;
 using StreetEye.Services.SseEvent;
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("LocalServer"));
 });
+
+//  dependência direta de httpclient
+BootstrapScopedClasses.Init(builder.Services);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
