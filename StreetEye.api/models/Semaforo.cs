@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace StreetEye.models
 {
@@ -21,8 +17,8 @@ namespace StreetEye.models
         // navigation
         [JsonIgnore]
         public ICollection<StatusSemaforo>? Status { get; set; }
-        
+
         [JsonIgnore]
         public ICollection<HistoricoUsuario>? Historicos { get; set; }
-    } 
+    }
 }
