@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using StreetEye.models.enums;
-using StreetEye.models;
 using Newtonsoft.Json;
+using StreetEye.models.enums;
 
 namespace StreetEye.models
 {
@@ -32,6 +26,6 @@ namespace StreetEye.models
         public ICollection<Usuario>? Usuarios { get; set; }
         [JsonIgnore]
         public ICollection<Responsavel>? Responsaveis { get; set; }
-        
+
     }
 }

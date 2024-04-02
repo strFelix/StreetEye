@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StreetEye.models
 {
@@ -14,7 +10,7 @@ namespace StreetEye.models
         public bool StatusVisor { get; set; }
         public bool StatusAudio { get; set; }
         public bool Estado { get; set; }
-        
+
         [NotMapped]
         public Semaforo? Semaforo { get; set; }
     }

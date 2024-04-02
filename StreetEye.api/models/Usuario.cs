@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace StreetEye.models
 {
@@ -14,13 +10,13 @@ namespace StreetEye.models
         public int IdUtilizador { get; set; }
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
-        public string Password {get; set;} = string.Empty;
-        public byte[]? PasswordHash {get; set;}
-        public byte[]? PasswordSalt {get; set;}
+        public string Password { get; set; } = string.Empty;
+        public byte[]? PasswordHash { get; set; }
+        public byte[]? PasswordSalt { get; set; }
 
         [NotMapped]
-        public string Token { get; set; }  = string.Empty;       
-        
+        public string Token { get; set; } = string.Empty;
+
         [NotMapped]
         [JsonIgnore]
         public UsuarioImagem? UsuarioImagem { get; set; }

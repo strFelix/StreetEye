@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using StreetEye.data;
-using StreetEye.models;
-
-using PhoneNumbers;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PhoneNumbers;
+using StreetEye.data;
+using StreetEye.models;
 
 namespace StreetEye.api.controllers;
 
@@ -19,7 +13,8 @@ public class UtilizadoresController : ControllerBase
 {
     private readonly DataContext _context;
 
-    public UtilizadoresController (DataContext context){
+    public UtilizadoresController(DataContext context)
+    {
         _context = context;
     }
 
@@ -58,19 +53,20 @@ public class UtilizadoresController : ControllerBase
         }
     }
     #endregion
-    
+
     #region Get
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetAllAsync(){
+    public async Task<IActionResult> GetAllAsync()
+    {
         try
         {
             List<Utilizador> list = await _context.Utilizadores.ToListAsync();
 
-            if(list.IsNullOrEmpty())
-                return NoContent();            
+            if (list.IsNullOrEmpty())
+                return NoContent();
 
             return Ok(list);
         }
@@ -84,12 +80,13 @@ public class UtilizadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByUtilizadorIdAsync(int id){
+    public async Task<IActionResult> GetByUtilizadorIdAsync(int id)
+    {
         try
         {
             Utilizador utilizador = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
 
-            if(utilizador == null)
+            if (utilizador == null)
                 return NotFound();
 
             return Ok(utilizador);
@@ -99,7 +96,7 @@ public class UtilizadoresController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
-        
+
     #endregion
 
     #region Post
@@ -107,16 +104,17 @@ public class UtilizadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Utilizador))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> PostUtilizadorAsync(Utilizador utilizador){
+    public async Task<IActionResult> PostUtilizadorAsync(Utilizador utilizador)
+    {
         try
-        {   
+        {
             // verificação data de nascimento (yyyy/MM/dd)
             DateTime dataNascimento = new DateTime(utilizador.DataNascimento.Year, utilizador.DataNascimento.Month, utilizador.DataNascimento.Day);
-            if (ValidarDataNascimento(dataNascimento))  
+            if (ValidarDataNascimento(dataNascimento))
                 throw new Exception("Data de nascimento invalida.");
 
             //verificação numero de telefone (9xxxx-xxxx)
-            if(ValidarNumeroTelefone(utilizador.Telefone))
+            if (ValidarNumeroTelefone(utilizador.Telefone))
                 throw new Exception("Numero de telefone invalido.");
 
             // registrar latitude e longitude de acordo com endereço passado
@@ -130,27 +128,28 @@ public class UtilizadoresController : ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
-    } 
+    }
     #endregion
-    
+
     #region Put
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> PutUtilizadorAsync(int id){
-    try
-        {       
+    public async Task<IActionResult> PutUtilizadorAsync(int id)
+    {
+        try
+        {
             // alterar nome, telefone e endereco apenas
             // registrar latitude e longitude de acordo com endereço passado
 
             Utilizador utilizador = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
-            
-            if(utilizador == null)
+
+            if (utilizador == null)
                 return NotFound();
 
-            if(ValidarNumeroTelefone(utilizador.Telefone))
+            if (ValidarNumeroTelefone(utilizador.Telefone))
                 throw new Exception("Numero de telefone invalido.");
 
             _context.Utilizadores.Update(utilizador);

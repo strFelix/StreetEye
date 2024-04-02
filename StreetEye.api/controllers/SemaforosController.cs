@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,22 +12,24 @@ namespace StreetEye.controllers
     {
         private readonly DataContext _context;
 
-        public SemaforosController (DataContext context){
+        public SemaforosController(DataContext context)
+        {
             _context = context;
         }
 
         #region Get
-            
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllAsync(){
+        public async Task<IActionResult> GetAllAsync()
+        {
             try
             {
                 List<Semaforo> list = await _context.Semaforos.ToListAsync();
 
-                if(list.IsNullOrEmpty())
+                if (list.IsNullOrEmpty())
                     return NoContent();
 
                 return Ok(list);
@@ -46,12 +44,13 @@ namespace StreetEye.controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetBySemaforoIdAsync(int id){
+        public async Task<IActionResult> GetBySemaforoIdAsync(int id)
+        {
             try
             {
                 Semaforo semaforo = await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
-                
-                if(semaforo == null)
+
+                if (semaforo == null)
                     return NotFound("Semaforo " + id + " não enocontrado");
 
                 return Ok(semaforo);
@@ -63,13 +62,14 @@ namespace StreetEye.controllers
         }
 
         #endregion
-        
+
         #region Post
-            
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Semaforo))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PostSemaforoAsync(Semaforo semaforo){
+        public async Task<IActionResult> PostSemaforoAsync(Semaforo semaforo)
+        {
             try
             {
                 await _context.Semaforos.AddAsync(semaforo);
@@ -86,17 +86,18 @@ namespace StreetEye.controllers
         #endregion
 
         #region Put
-            
+
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PutSemaforoAsync(int id){
+        public async Task<IActionResult> PutSemaforoAsync(int id)
+        {
             try
             {
                 Semaforo semaforo = await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
 
-                if(semaforo == null)
+                if (semaforo == null)
                     return NotFound("Semaforo" + id + "não encontrado");
 
                 _context.Semaforos.Update(semaforo);
@@ -108,21 +109,22 @@ namespace StreetEye.controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        
+
         #endregion
 
         #region Delete
-            
+
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteSemaforoAsync(int id){
+        public async Task<IActionResult> DeleteSemaforoAsync(int id)
+        {
             try
             {
                 Semaforo semaforo = await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
-                
-                if(semaforo == null)
+
+                if (semaforo == null)
                     return NotFound("Semaforo" + id + "não encontrado");
 
                 _context.Semaforos.Remove(semaforo);
@@ -130,7 +132,7 @@ namespace StreetEye.controllers
                 return Ok(rows);
             }
             catch (System.Exception ex)
-            {   
+            {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
