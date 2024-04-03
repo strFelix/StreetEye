@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|c:\\users\\brenda\\source\\repos\\strfelix\\streeteye\\streeteye.api\\repository\\utilizadores\\utilizadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:repository\\utilizadores\\utilizadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|c:\\users\\brenda\\source\\repos\\strfelix\\streeteye\\streeteye.api\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|c:\\users\\brenda\\source\\repos\\strfelix\\streeteye\\streeteye.api\\repository\\utilizadores\\iutilizadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:repository\\utilizadores\\iutilizadorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|c:\\users\\brenda\\source\\repos\\strfelix\\streeteye\\streeteye.api\\repository\\usuarios\\iusuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:repository\\usuarios\\iusuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|c:\\users\\brenda\\source\\repos\\strfelix\\streeteye\\streeteye.api\\controllers\\utilizadorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:controllers\\utilizadorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|c:\\users\\brenda\\source\\repos\\strfelix\\streeteye\\streeteye.api\\repository\\usuarios\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03BAF0C0-AF43-432B-8895-AEC33FC66300}|StreetEye.csproj|solutionrelative:repository\\usuarios\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,48 +36,48 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAkwBgAAAAAAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAkwB4AAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T18:20:45.904Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UtilizadoresController.cs",
-              "DocumentMoniker": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Controllers\\UtilizadoresController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UtilizadoresController.cs",
-              "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Controllers\\UtilizadoresController.cs",
-              "RelativeToolTip": "Controllers\\UtilizadoresController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T18:10:06.538Z",
+              "WhenOpened": "2024-04-03T20:13:31.15Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UtilizadorRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Utilizadores\\UtilizadorRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\Utilizadores\\UtilizadorRepository.cs",
-              "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Utilizadores\\UtilizadorRepository.cs",
-              "RelativeToolTip": "Repository\\Utilizadores\\UtilizadorRepository.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Controllers\\UsuariosController.cs",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAYwKUAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T18:12:31.494Z",
+              "WhenOpened": "2024-04-03T19:52:27.877Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IUtilizadorRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Utilizadores\\IUtilizadorRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\Utilizadores\\IUtilizadorRepository.cs",
-              "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Utilizadores\\IUtilizadorRepository.cs",
-              "RelativeToolTip": "Repository\\Utilizadores\\IUtilizadorRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAfAAAA",
+              "Title": "IUsuarioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Usuarios\\IUsuarioRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Usuarios\\IUsuarioRepository.cs",
+              "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Usuarios\\IUsuarioRepository.cs",
+              "RelativeToolTip": "Repository\\Usuarios\\IUsuarioRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T18:01:39.202Z",
+              "WhenOpened": "2024-04-03T19:49:02.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsuarioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Usuarios\\UsuarioRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Usuarios\\UsuarioRepository.cs",
+              "ToolTip": "C:\\Users\\Brenda\\source\\repos\\strFelix\\StreetEye\\StreetEye.api\\Repository\\Usuarios\\UsuarioRepository.cs",
+              "RelativeToolTip": "Repository\\Usuarios\\UsuarioRepository.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAmwCoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T19:28:34.487Z",
               "EditorCaption": ""
             }
           ]
