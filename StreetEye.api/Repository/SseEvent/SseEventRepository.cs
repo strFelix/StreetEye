@@ -1,5 +1,5 @@
 ﻿using StreetEye.Exceptions;
-namespace StreetEye.Repository
+namespace StreetEye.Repository.SseEvent
 {
     public sealed class SseEventRepository : ISseEventRepository
     {
@@ -10,7 +10,7 @@ namespace StreetEye.Repository
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<System.IO.Stream> GetSseEventStreamAsync(string sseEndppointUrl, CancellationToken cancellationToken)
+        public async Task<Stream> GetSseEventStreamAsync(string sseEndppointUrl, CancellationToken cancellationToken)
         {
             HttpResponseMessage response = await _httpClient.GetAsync(sseEndppointUrl, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             if (!response.IsSuccessStatusCode)

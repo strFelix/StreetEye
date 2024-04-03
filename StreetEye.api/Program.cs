@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StreetEye.Config;
 using StreetEye.data;
-using StreetEye.Repository;
+using StreetEye.Repository.Responsaveis;
+using StreetEye.Repository.SseEvent;
+using StreetEye.Repository.Utilizadores;
 using StreetEye.Services.SseEvent;
 using System.Text;
 
@@ -20,8 +22,11 @@ BootstrapScopedClasses.Init(builder.Services);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddScoped<ISseEventRepository, SseEventRepository>();
 builder.Services.AddScoped<ISseEventService, SseEventService>();
+builder.Services.AddScoped<IResponsavelRepository, ResponsavelRepository>();
+builder.Services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

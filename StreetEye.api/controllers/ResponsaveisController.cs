@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using StreetEye.data;
 using StreetEye.models;
+using StreetEye.Repository.Responsaveis;
+using StreetEye.Repository.Utilizadores;
 using System.Security.Claims;
 
 namespace StreetEye.api.controllers;
@@ -13,12 +13,17 @@ namespace StreetEye.api.controllers;
 [Route("[controller]")]
 public class ResponsaveisController : ControllerBase
 {
-    private readonly DataContext _context;
+    private readonly IResponsavelRepository _responsavelRepository;
+    private readonly IUtilizadorRepository _utilizadorRepository;
     private readonly IHttpContextAccessor _httpContextAcessor;
 
-    public ResponsaveisController(DataContext context, IHttpContextAccessor httpContextAccessor)
+    public ResponsaveisController(
+        IResponsavelRepository responsavelRepository, 
+        IUtilizadorRepository utilizadorRepository, 
+        IHttpContextAccessor httpContextAccessor)
     {
-        _context = context;
+        _responsavelRepository = responsavelRepository;
+        _utilizadorRepository = utilizadorRepository;
         _httpContextAcessor = httpContextAccessor;
     }
 
@@ -32,16 +37,14 @@ public class ResponsaveisController : ControllerBase
     {
         try
         {
-            List<Utilizador> list = await _context.Utilizadores
-                .Where(u => u.Tipo.Equals(models.enums.TipoUtilizador.RESPONSAVEL))
-                .ToListAsync();
+            List<Utilizador> list = await _utilizadorRepository.GetAllResponsaveisAsync();
 
             if (list.IsNullOrEmpty())
                 return NoContent();
 
             return Ok(list);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -55,17 +58,14 @@ public class ResponsaveisController : ControllerBase
     {
         try
         {
-            Responsavel responsavel = await _context.Responsaveis
-                .Include(r => r.ResponsavelUtilizador)
-                .Include(r => r.Utilizador)
-                .FirstOrDefaultAsync(u => u.IdResponsavel == id);
+            Responsavel responsavel = await _responsavelRepository.GetByUtilizadorIdAsync(id);
 
             if (responsavel == null)
                 return NotFound();
 
             return Ok(responsavel.ResponsavelUtilizador);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -82,8 +82,7 @@ public class ResponsaveisController : ControllerBase
         try
         {
             responsavelUtilizador.Tipo = models.enums.TipoUtilizador.RESPONSAVEL;
-            await _context.Utilizadores.AddAsync(responsavelUtilizador);
-            await _context.SaveChangesAsync();
+            _utilizadorRepository.AddUtilizadorAsync(responsavelUtilizador);
 
             int id = int.Parse(_httpContextAcessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             Responsavel responsavel = new Responsavel
@@ -92,12 +91,11 @@ public class ResponsaveisController : ControllerBase
                 IdResponsavel = responsavelUtilizador.Id
             };
 
-            await _context.Responsaveis.AddAsync(responsavel);
-            await _context.SaveChangesAsync();
+            _responsavelRepository.AddResponsavelAsync(responsavel);
 
             return Created(nameof(ResponsaveisController), responsavelUtilizador);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -113,16 +111,14 @@ public class ResponsaveisController : ControllerBase
     {
         try
         {
-            Utilizador responsavel = await _context.Utilizadores.FirstOrDefaultAsync(r => r.Id == id);
-
+            Utilizador responsavel = await _utilizadorRepository.GetUtilizadorAsync(id);
             if (responsavel == null)
                 return NotFound();
 
-            _context.Utilizadores.Update(responsavel);
-            await _context.SaveChangesAsync();
+            _utilizadorRepository.UpdateUtilizadorAsync(responsavel);
             return NoContent();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -132,24 +128,23 @@ public class ResponsaveisController : ControllerBase
     #region Delete
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteResponsavelAsync(int id)
     {
         try
         {
-            Utilizador responsavelUtilizador = await _context.Utilizadores.FirstOrDefaultAsync(r => r.Id == id);
-            Responsavel responsavel = await _context.Responsaveis.FirstOrDefaultAsync(r => r.IdResponsavel == id);
+            Utilizador responsavelUtilizador = await _utilizadorRepository.GetUtilizadorAsync(id);
+            Responsavel responsavel = await _responsavelRepository.GetResponsavelAsync(id);
 
             if (responsavelUtilizador == null || responsavel == null)
                 return NotFound();
 
-            _context.Responsaveis.Remove(responsavel);
-            _context.Utilizadores.Remove(responsavelUtilizador);
-            int rows = await _context.SaveChangesAsync();
-            return Ok(rows);
+            _responsavelRepository.DeleteResponsavelAsync(responsavel);
+            _utilizadorRepository.DeleteUtilizadorAsync(responsavelUtilizador);
+            return NoContent();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }

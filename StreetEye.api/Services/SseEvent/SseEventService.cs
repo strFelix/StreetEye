@@ -1,4 +1,4 @@
-﻿using StreetEye.Repository;
+﻿using StreetEye.Repository.SseEvent;
 
 namespace StreetEye.Services.SseEvent
 {

@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PhoneNumbers;
-using StreetEye.data;
 using StreetEye.models;
+using StreetEye.Repository.Utilizadores;
 
 namespace StreetEye.api.controllers;
 
@@ -11,11 +10,11 @@ namespace StreetEye.api.controllers;
 [Route("[controller]")]
 public class UtilizadoresController : ControllerBase
 {
-    private readonly DataContext _context;
+    private readonly IUtilizadorRepository _utilizadorRepository;
 
-    public UtilizadoresController(DataContext context)
+    public UtilizadoresController(IUtilizadorRepository utilizadorRepository)
     {
-        _context = context;
+        _utilizadorRepository = utilizadorRepository;
     }
 
     #region Validations
@@ -63,14 +62,14 @@ public class UtilizadoresController : ControllerBase
     {
         try
         {
-            List<Utilizador> list = await _context.Utilizadores.ToListAsync();
+            List<Utilizador> list = await _utilizadorRepository.GetAllUtilizadoresAsync();
 
             if (list.IsNullOrEmpty())
                 return NoContent();
 
             return Ok(list);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -84,14 +83,14 @@ public class UtilizadoresController : ControllerBase
     {
         try
         {
-            Utilizador utilizador = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
+            Utilizador utilizador = await _utilizadorRepository.GetUtilizadorAsync(id);
 
             if (utilizador == null)
                 return NotFound();
 
             return Ok(utilizador);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -119,12 +118,11 @@ public class UtilizadoresController : ControllerBase
 
             // registrar latitude e longitude de acordo com endereço passado
 
-            await _context.Utilizadores.AddAsync(utilizador);
-            await _context.SaveChangesAsync();
+            _utilizadorRepository.AddUtilizadorAsync(utilizador);
 
             return Created(nameof(UtilizadoresController), utilizador);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
@@ -144,7 +142,7 @@ public class UtilizadoresController : ControllerBase
             // alterar nome, telefone e endereco apenas
             // registrar latitude e longitude de acordo com endereço passado
 
-            Utilizador utilizador = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Id == id);
+            Utilizador utilizador = await _utilizadorRepository.GetUtilizadorAsync(id);
 
             if (utilizador == null)
                 return NotFound();
@@ -152,12 +150,11 @@ public class UtilizadoresController : ControllerBase
             if (ValidarNumeroTelefone(utilizador.Telefone))
                 throw new Exception("Numero de telefone invalido.");
 
-            _context.Utilizadores.Update(utilizador);
-            await _context.SaveChangesAsync();
+            _utilizadorRepository.UpdateUtilizadorAsync(utilizador);
 
             return NoContent();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
