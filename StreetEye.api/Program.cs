@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using StreetEye.Config;
 using StreetEye.data;
 using StreetEye.Repository.Responsaveis;
+using StreetEye.Repository.Semaforos;
 using StreetEye.Repository.SseEvent;
 using StreetEye.Repository.Usuarios;
 using StreetEye.Repository.Utilizadores;
@@ -29,6 +30,7 @@ builder.Services.AddScoped<ISseEventService, SseEventService>();
 builder.Services.AddScoped<IResponsavelRepository, ResponsavelRepository>();
 builder.Services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ISemaforoRepository, SemaforoRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
