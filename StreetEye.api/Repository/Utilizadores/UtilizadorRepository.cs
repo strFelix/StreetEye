@@ -30,7 +30,7 @@ public class UtilizadorRepository : IUtilizadorRepository
         return await _context.Utilizadores.FirstOrDefaultAsync(r => r.Id == id);
     }
 
-    public async void AddUtilizadorAsync(Utilizador utilizador)
+    public async Task AddUtilizadorAsync(Utilizador utilizador)
     {
         await _context.Utilizadores.AddAsync(utilizador);
         await _context.SaveChangesAsync();

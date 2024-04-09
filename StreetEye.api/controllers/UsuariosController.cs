@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RpgApi.Utils;
+using StreetEye.data;
 using StreetEye.models;
 using StreetEye.Repository.Usuarios;
 using StreetEye.Repository.Utilizadores;
@@ -115,9 +116,9 @@ public class UsuariosController : ControllerBase
             usuario.Password = string.Empty;
             usuario.PasswordHash = hash;
             usuario.PasswordSalt = salt;
-
-            _utilizadorRepository.AddUtilizadorAsync(usuario.Utilizador);
-            _usuarioRepository.AddUsuarioAsync(usuario);
+            
+            await _usuarioRepository.AddUsuarioAsync(usuario);
+            await _utilizadorRepository.AddUtilizadorAsync(usuario.Utilizador);
 
             return Created(nameof(UsuariosController), usuario);
         }

@@ -26,10 +26,9 @@ public sealed class UsuarioRepository : IUsuarioRepository
         return await _context.Usuarios.FirstOrDefaultAsync(ue => ue.Email.ToLower() == email.ToLower());
     }
 
-    public async void AddUsuarioAsync(Usuario usuario)
+    public async Task AddUsuarioAsync(Usuario usuario)
     {
         await _context.Usuarios.AddAsync(usuario);
-        await _context.SaveChangesAsync();
     }
 
     public async void UpdateUsuarioAsync(Usuario usuario)
