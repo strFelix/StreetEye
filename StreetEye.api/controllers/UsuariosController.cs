@@ -31,7 +31,7 @@ public class UsuariosController : ControllerBase
     }
 
     #region Token
-
+    [AllowAnonymous]
     private string CreateToken(Usuario usuario)
     {
         List<Claim> claims = new List<Claim>
