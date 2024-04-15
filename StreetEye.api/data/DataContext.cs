@@ -147,6 +147,20 @@ public class DataContext : DbContext
         #endregion
 
         #region Semaforos
+        Semaforo semaforo = new Semaforo
+        {
+            Id = 1,
+            Descricao = "Principal",
+            IntervaloAberto = 20,
+            IntervaloFechado = 40,
+            Endereco = "Rua Alcantara",
+            Numero = "113",
+            ViaCruzamento = "Guilherme Cotching",
+            Latitude = "-23.519502072656618", 
+            Longitude = "-46.59639509306988"
+        };
+        modelBuilder.Entity<Semaforo>().HasData(semaforo);
+
         modelBuilder.Entity<Semaforo>()
             .ToTable("semaforos");
 

@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RpgApi.Utils;
 using StreetEye.data;
 using StreetEye.models;
+using StreetEye.Repository.Usuarios;
+using StreetEye.Repository.Utilizadores;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,13 +17,17 @@ namespace StreetEye.api.controllers;
 [Route("[controller]")]
 public class UsuariosController : ControllerBase
 {
-    private readonly DataContext _context;
     private readonly IConfiguration _configuration;
+    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUtilizadorRepository _utilizadorRepository;
 
-    public UsuariosController(DataContext context, IConfiguration configuration)
+    public UsuariosController(IConfiguration configuration,
+        IUsuarioRepository usuarioRepository,
+        IUtilizadorRepository utilizadorRepository)
     {
-        _context = context;
         _configuration = configuration;
+        _usuarioRepository = usuarioRepository;
+        _utilizadorRepository = utilizadorRepository;
     }
 
     #region Token
@@ -59,7 +64,7 @@ public class UsuariosController : ControllerBase
     {
         try
         {
-            List<Usuario> usuarios = await _context.Usuarios.ToListAsync();
+            List<Usuario> usuarios = await _usuarioRepository.GetAllAsync();
             return Ok(usuarios);
         }
         catch (Exception ex)
@@ -76,7 +81,7 @@ public class UsuariosController : ControllerBase
     {
         try
         {
-            Usuario usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
+            Usuario usuario = await _usuarioRepository.GetByUsuarioIdAsync(id);
 
             if (usuario == null)
                 return NotFound("Usuario " + id + "não entcontrado");
@@ -102,17 +107,18 @@ public class UsuariosController : ControllerBase
     {
         try
         {
-            Usuario usuarioExists = await _context.Usuarios.FirstOrDefaultAsync(ue => ue.Email == usuario.Email);
+            Usuario usuarioExists = await _usuarioRepository.GetByUsuarioEmailAsync(usuario.Email);
             if (usuarioExists != null && !usuarioExists.Equals(usuario))
                 return Conflict("Usuario já existe.");
 
             Criptografia.CriarPasswordHash(usuario.Password, out byte[] hash, out byte[] salt);
+
             usuario.Password = string.Empty;
             usuario.PasswordHash = hash;
             usuario.PasswordSalt = salt;
-            await _context.Utilizadores.AddAsync(usuario.Utilizador);
-            await _context.Usuarios.AddAsync(usuario);
-            await _context.SaveChangesAsync();
+            
+            await _usuarioRepository.AddUsuarioAsync(usuario);
+            await _utilizadorRepository.AddUtilizadorAsync(usuario.Utilizador);
 
             return Created(nameof(UsuariosController), usuario);
         }
@@ -131,8 +137,7 @@ public class UsuariosController : ControllerBase
     {
         try
         {
-            Usuario? usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(x => x.Email.ToLower().Equals(credenciais.Email.ToLower()));
+            Usuario? usuario = await _usuarioRepository.GetByUsuarioEmailAsync(credenciais.Email);
 
             if (usuario == null)
                 return NotFound("Usuario não encontrado.");
@@ -140,7 +145,7 @@ public class UsuariosController : ControllerBase
                 return BadRequest("Senha incorreta.");
             else
             {
-                usuario.Utilizador = await _context.Utilizadores.FirstOrDefaultAsync(ut => ut.Id == usuario.IdUtilizador);
+                usuario.Utilizador = await _utilizadorRepository.GetUtilizadorAsync(usuario.IdUtilizador);
 
                 usuario.PasswordHash = null;
                 usuario.PasswordSalt = null;
@@ -166,13 +171,12 @@ public class UsuariosController : ControllerBase
     {
         try
         {
-            Usuario usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
+            Usuario usuario = await _usuarioRepository.GetByUsuarioIdAsync(id);
 
             if (usuario == null)
                 return NotFound("Usuario não entcontrado");
 
-            _context.Usuarios.Update(usuario);
-            await _context.SaveChangesAsync();
+            _usuarioRepository.UpdateUsuarioAsync(usuario);
             return NoContent();
 
         }

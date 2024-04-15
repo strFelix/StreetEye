@@ -17,7 +17,7 @@ namespace StreetEye.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -112,6 +112,20 @@ namespace StreetEye.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("semaforos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descricao = "Principal",
+                            Endereco = "Rua Alcantara",
+                            IntervaloAberto = 20,
+                            IntervaloFechado = 40,
+                            Latitude = "-23.519502072656618",
+                            Longitude = "-46.59639509306988",
+                            Numero = "113",
+                            ViaCruzamento = "Guilherme Cotching"
+                        });
                 });
 
             modelBuilder.Entity("StreetEye.models.StatusSemaforo", b =>
