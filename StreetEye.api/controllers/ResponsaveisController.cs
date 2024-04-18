@@ -82,7 +82,7 @@ public class ResponsaveisController : ControllerBase
         try
         {
             responsavelUtilizador.Tipo = models.enums.TipoUtilizador.RESPONSAVEL;
-            _utilizadorRepository.AddUtilizadorAsync(responsavelUtilizador);
+            await _utilizadorRepository.AddUtilizadorAsync(responsavelUtilizador);
 
             int id = int.Parse(_httpContextAcessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             Responsavel responsavel = new Responsavel
@@ -91,7 +91,7 @@ public class ResponsaveisController : ControllerBase
                 IdResponsavel = responsavelUtilizador.Id
             };
 
-            _responsavelRepository.AddResponsavelAsync(responsavel);
+            await _responsavelRepository.AddResponsavelAsync(responsavel);
 
             return Created(nameof(ResponsaveisController), responsavelUtilizador);
         }

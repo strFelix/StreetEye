@@ -24,7 +24,7 @@ public sealed class ResponsavelRepository : IResponsavelRepository
             .FirstOrDefaultAsync(u => u.IdResponsavel == id);
     }
 
-    public async void AddResponsavelAsync(Responsavel responsavel)
+    public async Task AddResponsavelAsync(Responsavel responsavel)
     {
         await _context.Responsaveis.AddAsync(responsavel);
         await _context.SaveChangesAsync();
