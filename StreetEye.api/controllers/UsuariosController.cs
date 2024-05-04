@@ -44,7 +44,7 @@ public class UsuariosController : ControllerBase
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.Now.AddHours(4),
+            Expires = DateTime.Now.AddDays(4),
             SigningCredentials = creds
         };
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
