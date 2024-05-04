@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using StreetEye.models;
+using StreetEye.Models;
 using StreetEye.Repository.Responsaveis;
 using StreetEye.Repository.Utilizadores;
 using System.Security.Claims;

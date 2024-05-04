@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using StreetEye.models.enums;
+using StreetEye.Models;
 
 namespace StreetEye.models
 {

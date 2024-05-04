@@ -1,6 +1,7 @@
+using StreetEye.models;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace StreetEye.models
+namespace StreetEye.Models
 {
     public class Responsavel
     {

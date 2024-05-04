@@ -1,3 +1,4 @@
+using StreetEye.Models;
 using System.Text.Json.Serialization;
 
 namespace StreetEye.models

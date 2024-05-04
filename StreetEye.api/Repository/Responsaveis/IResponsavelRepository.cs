@@ -1,4 +1,4 @@
-﻿using StreetEye.models;
+﻿using StreetEye.Models;
 
 namespace StreetEye.Repository.Responsaveis;
 

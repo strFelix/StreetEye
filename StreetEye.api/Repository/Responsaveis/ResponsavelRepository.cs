@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StreetEye.data;
-using StreetEye.models;
+using StreetEye.Models;
 
 namespace StreetEye.Repository.Responsaveis;
 public sealed class ResponsavelRepository : IResponsavelRepository

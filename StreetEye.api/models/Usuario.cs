@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using StreetEye.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
