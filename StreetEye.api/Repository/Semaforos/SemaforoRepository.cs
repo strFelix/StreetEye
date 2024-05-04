@@ -17,6 +17,12 @@ namespace StreetEye.Repository.Semaforos
             return await _context.Semaforos.FirstOrDefaultAsync(s => s.Id == id);
         }
 
+        public async Task<List<Semaforo>> GetAllAsync()
+        {
+            List<Semaforo> semaforos = await _context.Semaforos.ToListAsync();
+            return semaforos;
+        }
+
         public async void UpdateSemaforo(Semaforo semaforo)
         {
             _context.Semaforos.Update(semaforo);

@@ -39,6 +39,19 @@ namespace StreetEye.controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync(int id)
+        {
+            try
+            {
+                return Ok(await _SemaforoRepository.GetAllAsync());
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         #endregion
 
