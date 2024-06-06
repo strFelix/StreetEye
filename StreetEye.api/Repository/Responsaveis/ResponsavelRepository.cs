@@ -21,7 +21,7 @@ public sealed class ResponsavelRepository : IResponsavelRepository
         return await _context.Responsaveis
             .Include(r => r.ResponsavelUtilizador)
             .Include(r => r.Utilizador)
-            .FirstOrDefaultAsync(u => u.IdResponsavel == id);
+            .FirstOrDefaultAsync(u => u.IdUtilizador == id);
     }
 
     public async Task AddResponsavelAsync(Responsavel responsavel)

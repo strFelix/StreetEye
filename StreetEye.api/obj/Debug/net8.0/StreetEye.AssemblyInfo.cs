@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StreetEye")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23ac62df301a71c6e7db5864d38719da5cbcf5aa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2485d29566540ad23e6aafaedb853597e86d291")]
 [assembly: System.Reflection.AssemblyProductAttribute("StreetEye")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StreetEye")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
