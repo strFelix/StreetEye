@@ -130,28 +130,35 @@ public class UtilizadoresController : ControllerBase
     #endregion
 
     #region Put
-    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> PutUtilizadorAsync(int id)
+    public async Task<IActionResult> PutUtilizadorAsync(Utilizador utilizadorUpdated)
     {
         try
         {
             // alterar nome, telefone e endereco apenas
             // registrar latitude e longitude de acordo com endereço passado
 
-            Utilizador utilizador = await _utilizadorRepository.GetUtilizadorAsync(id);
+            Utilizador utilizador = await _utilizadorRepository.GetUtilizadorAsync(utilizadorUpdated.Id);
 
             if (utilizador == null)
                 return NotFound();
 
+            utilizador.Nome = utilizadorUpdated.Nome;
+            utilizador.Telefone = utilizadorUpdated.Telefone;
+            utilizador.CEP = utilizadorUpdated.CEP;
+            utilizador.Endereco = utilizadorUpdated.Endereco;
+            utilizador.NumeroEndereco = utilizadorUpdated.NumeroEndereco;
+            utilizador.Complemento = utilizadorUpdated.Complemento;
+            utilizador.Cidade = utilizadorUpdated.Cidade;
+            utilizador.UF = utilizadorUpdated.UF;
+
             if (ValidarNumeroTelefone(utilizador.Telefone))
-                throw new Exception("Numero de telefone invalido.");
+                throw new Exception("Numero de telefone sinvalido.");
 
             _utilizadorRepository.UpdateUtilizadorAsync(utilizador);
-
             return NoContent();
         }
         catch (Exception ex)
