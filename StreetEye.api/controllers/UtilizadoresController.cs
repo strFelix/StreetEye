@@ -130,7 +130,7 @@ public class UtilizadoresController : ControllerBase
     #endregion
 
     #region Put
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [HttpPut]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
