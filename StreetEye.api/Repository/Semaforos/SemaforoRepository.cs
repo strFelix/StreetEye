@@ -23,6 +23,12 @@ namespace StreetEye.Repository.Semaforos
             return semaforos;
         }
 
+        public async Task AddStatusSemaforoAsync(StatusSemaforo statusSemaforo)
+        {
+            await _context.StatusSemaforos.AddAsync(statusSemaforo);
+            await _context.SaveChangesAsync();
+        }
+
         public async void UpdateSemaforo(Semaforo semaforo)
         {
             _context.Semaforos.Update(semaforo);

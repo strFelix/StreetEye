@@ -55,6 +55,32 @@ namespace StreetEye.controllers
 
         #endregion
 
+        #region Post
+    
+        [HttpPost("Historico")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StatusSemaforo))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PostHistoricoSemaforoAsync(StatusSemaforo statusSemaforo)
+        {
+            try
+            {
+                if (statusSemaforo == null)
+                    return BadRequest("Historico não pode ser nulo");
+            
+                statusSemaforo.Momento = DateTime.Now.AddMilliseconds(1);
+
+                await _SemaforoRepository.AddStatusSemaforoAsync(statusSemaforo);
+                return Created();
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        #endregion
+
+
         #region Put
 
         [HttpPut("{id}")]

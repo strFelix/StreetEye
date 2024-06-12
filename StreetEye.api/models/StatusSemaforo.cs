@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace StreetEye.models
 {
@@ -12,6 +13,7 @@ namespace StreetEye.models
         public bool Estado { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public Semaforo? Semaforo { get; set; }
     }
 }
