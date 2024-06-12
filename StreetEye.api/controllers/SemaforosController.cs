@@ -58,7 +58,7 @@ namespace StreetEye.controllers
         #region Post
     
         [HttpPost("Historico")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StatusSemaforo))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostHistoricoSemaforoAsync(StatusSemaforo statusSemaforo)
@@ -71,7 +71,7 @@ namespace StreetEye.controllers
                 statusSemaforo.Momento = DateTime.Now.AddMilliseconds(1);
 
                 await _SemaforoRepository.AddStatusSemaforoAsync(statusSemaforo);
-                return Created();
+                return NoContent();
             }
             catch (System.Exception ex)
             {
