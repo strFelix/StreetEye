@@ -160,6 +160,9 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpPost("Historico")]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(HistoricoUsuario))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> PostHistoricoUsuarioAsync(HistoricoUsuario historico)
     {
         try
