@@ -8,6 +8,7 @@ namespace StreetEye.Repository.Usuarios
         public Task<Usuario> GetByUsuarioIdAsync(int id);
         public Task<Usuario> GetByUsuarioEmailAsync(string email);
         public Task AddUsuarioAsync(Usuario usuario);
+        public Task AddHistoricoUsuarioAsync(HistoricoUsuario historicoUsuario);
         public void UpdateUsuarioAsync(Usuario usuario);
     }
 }

@@ -159,6 +159,24 @@ public class UsuariosController : ControllerBase
         }
     }
 
+    [HttpPost("Historico")]
+    public async Task<IActionResult> PostHistoricoUsuarioAsync(HistoricoUsuario historico)
+    {
+        try
+        {
+            if (historico == null)
+                return BadRequest("Historico não pode ser nulo");
+            
+            historico.Momento = DateTime.Now.AddMilliseconds(1);
+            await _usuarioRepository.AddHistoricoUsuarioAsync(historico);
+            return Created();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
     #endregion
 
     #region Put

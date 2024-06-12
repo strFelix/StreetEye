@@ -31,6 +31,22 @@ public sealed class UsuarioRepository : IUsuarioRepository
         await _context.Usuarios.AddAsync(usuario);
     }
 
+    public async Task AddHistoricoUsuarioAsync(HistoricoUsuario historicoUsuario)
+    {
+        // Verifique se o usuário existe
+        var usuarioExiste = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == historicoUsuario.IdUsuario);
+        if (usuarioExiste == null)
+        {
+            throw new Exception("Usuário não encontrado");
+        }
+
+        historicoUsuario.Momento.AddTicks(1);
+
+        // Adicione o histórico
+        await _context.HistoricoUsuarios.AddAsync(historicoUsuario);
+        await _context.SaveChangesAsync();
+    }
+
     public async void UpdateUsuarioAsync(Usuario usuario)
     {
         _context.Usuarios.Update(usuario);
